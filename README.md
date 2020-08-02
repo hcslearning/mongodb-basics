@@ -10,6 +10,7 @@ show collections // muestras las colecciones
 show users // muestra los usuarios
 db // muestra la base de datos que se está usando
 use <dbname> // cambia la BD en uso a <dbname>
+cls // limpia la consola
 ```
 
 Binarios
@@ -34,6 +35,15 @@ mongorestore
 ```
 
 Extraído de (Membrey et al., 2014, pp. 24)
+
+
+
+Insertar Datos
+----------------
+```javascript
+negra = { nombre: "Negra", nacimiento: new Date('2012-10-12'), edad: 8, color: "negro", tamano: "grande" } // definicion de Documento (JSON)
+db.perros.insert( negra ) // inserta el Documento en la colección 'perros'
+```
 
 Fuentes de Información
 -----------------------
