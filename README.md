@@ -38,28 +38,42 @@ Extraído de (Membrey et al., 2014, pp. 24)
 
 
 
-Insertar Datos
-----------------
+Insertar y Eliminar Datos
+--------------------------
 ```javascript
+// ----------------------------------------------
+// INSERT
+// ----------------------------------------------
 // ej de definición de Documento JSON
 negra = { nombre: "Negra", nacimiento: new Date('2012-10-12'), edad: 8, color: "negro", tamano: "grande" }
 chola = { nombre: "Chola", nacimiento: new Date('2006-11-18'), edad: 14, color: "negro", tamano: "mediano" }
-pepa = { nombre: "Pepa", nacimiento: new Date('2017-12-01'), edad: 3, color: "negro", tamano: "pequeño" }
-mila = { nombre: "Mila", nacimiento: new Date('2015-12-01'), edad: 5, color: "negro", tamano: "pequeño", raza: "terrier chileno" }
+pepa = { nombre: "Pepa", nacimiento: new Date('2017-12-01'), edad: 3, color: "cafe", tamano: "mini" }
+mila = { nombre: "Mila", nacimiento: new Date('2015-12-01'), edad: 5, color: "cafe", tamano: "pequeño", raza: "terrier chileno" }
 // mongo no exige respetar un esquema, por ej. puedo agregar el campo raza
 chimu = { nombre: "Chimu", nacimiento: new Date('2005-01-01'), edad: 15, color: "blanco", tamano: "pequeño", raza: "poodle" } 
 // inserta el Documento en la colección 'perros'
 db.perros.insert( negra ) 
 // si no especifico un campo _id en el Documento, Mongo lo creará automáticamente 
-db.perros.insert( chola ) 
-db.perros.insert( chimu )
+db.perros.insert( chola )
+db.perros.insertMany([pepa, mila, chimu])
+// -------------------------------------------------------
+// DELETE
+// -------------------------------------------------------
+// borra a todos los perros
+db.perros.deleteMany({})
+// borra a todos los perros de color café
+db.perros.deleteMany({color: "cafe"})
+// borra solo 1 por ID
+db.perros.deleteOne( {_id: ObjectId('5f27569a9d38f4dba577956c')} ) 
 ```
 
 Consultar Datos
 -----------------
 ```javascript
 // Devuelve todos los Documentos de la colección 'perros'
-db.perros.find() 
+db.perros.find()
+// Formatea los datos para hacerlos más legibles para el humano
+db.perros.find().pretty() 
 // Busca a los perros de raza poodle
 db.perros.find( {raza: "poodle"} )
 // Busca los perros en que la raza sea NULL o no esté definida (devuelve 3 docs) 
@@ -78,7 +92,8 @@ db.perros.find({}, {nombre: 1})
 db.perros.find({}, {nombre: 1}).limit(2) 
 // Salta 2 docs y devuelve los 2 sgtes
 db.perros.find({}, {nombre: 1}).skip(2).limit(2) 
-
+// shortcut para limitar a 2 saltar los 3 primeros
+db.perros.find({}, {}, 2, 3)
 ```
 
 Fuentes de Información
