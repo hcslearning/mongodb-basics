@@ -37,6 +37,13 @@ mongorestore
 Extraído de (Membrey et al., 2014, pp. 24)
 
 
+Backup and Restore
+-------------------
+```bash
+$ mongodump mongodb+srv://dbuser:dbpass@localhost/database?retryWrites=true&w=majority
+$ mongorestore mongodb://mongouser:mongopass@otherserverhost:port/otherdb dump/database/respaldo.bson 
+```
+
 
 Insertar y Eliminar Datos
 --------------------------
