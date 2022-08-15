@@ -41,7 +41,7 @@ Backup and Restore
 -------------------
 ```bash
 $ mongodump mongodb+srv://dbuser:dbpass@localhost/database?retryWrites=true&w=majority
-$ mongorestore mongodb://mongouser:mongopass@otherserverhost:port/otherdb dump/database/respaldo.bson 
+$ mongorestore mongodb://mongouser:mongopass@otherserverhost:port/otherdb?authSource=admin dump/database/respaldo.bson 
 ```
 
 
